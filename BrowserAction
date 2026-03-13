@@ -1,0 +1,62 @@
+import { test, expect , chromium } from '@playwright/test';
+
+test('Browser action-open and close browser' ,async()=> {
+    //Launch the browser engine
+    const broswerEngine =await chromium.launch({channel:'chrome',headless:false});
+ 
+    //Launch the browser contect or incognito window
+    const broswercontext =await broswerEngine.newContext();
+
+    //clear all cookies before execution 
+    await broswercontext.clearCookies();
+    
+    //Launch the new page or tab within the browser
+    const page= await broswercontext.newPage();
+
+    // maximize the browser window.
+    await page.setViewportSize({width: 1920, height: 1080})
+
+    //emter URL and launch the page
+    await page.goto('https://www.google.com')
+
+    // verify the page title
+    await expect(page).toHaveTitle('Google');
+    
+    //locate sign in  and take screenshot
+    const signInButton = page.locator('a[aria-label="Sign in"]');
+    await signInButton.screenshot({ path : 'screenshot/sign-in-button.png'});
+
+    //Launch new application within the same tab or page by Url https://playwright.dev
+    await page.goto('https://github.com/copilot/c/09392506-273f-423f-8054-9c936a9e5d9f');
+
+    await page.screenshot({ path : 'screenshot/playwright.png' ,fullPage: true});
+
+    //go back to the google application (previous application)
+    await page.goBack();
+
+    //go forward to the playwright application (before application)
+    await page.goForward();
+
+    //to reload
+    await page.reload();
+
+    //launch new tab within the browser
+    const newPage = await broswercontext.newPage();
+
+    //Launch new page or application  Url https://selenium.dev
+    await newPage.goto('https://auth.ultimatix.net/utxLogin/login?TYPE=33554432&REALMOID=06-9ed1ab3e-4343-420c-b058-68beeef4c9ff&GUID=&SMAUTHREASON=0&METHOD=GET&SMAGENTNAME=-SM-hH4s%2bx89e0zLyyJB26KwxN5y7fGJNanRUhav0qPo%2f9tiGbWXhsZrLgoPW%2fGInc1a&TARGET=-SM-https%3a%2f%2fwww%2eultimatix%2enet%2f');
+
+    //go back to previous application availble in the previous tab
+    await page.bringToFront();
+
+    //get the current browser URL
+    let currentUrl =page.url();
+    console.log(currentUrl);
+
+    //close the current URL
+    await page.close();
+
+    //close all browser
+    await broswerEngine.close();
+
+});

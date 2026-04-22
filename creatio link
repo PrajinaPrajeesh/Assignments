@@ -1,0 +1,2 @@
+https://accounts.creatio.com/login/login.alm?ReturnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fclient_id%3Dstudio%26nonce%3D7%26redirect_uri%3Dhttps:%252F%252Fstudio.creatio.com%252FServiceModel%252FAuthService.svc%252FOpenIdCallback%26response_type%3Dcode%26scope%3Dopenid%2Bprofile%2Bemail%2Bphone%26&ReturnConfirmationUrl=https:%2F%2Fstudio.creatio.com%2F0%2FClientApp%2F%3FisEmailConfirmed%3Dtrue%23%2FEnvironmentManagement%7B0%7D
+
